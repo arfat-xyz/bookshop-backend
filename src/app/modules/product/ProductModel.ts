@@ -7,6 +7,10 @@ const productSchema = new Schema<IProduct, IProductModel>(
       type: String,
       required: true,
     },
+    addBy: {
+      type: String,
+      required: true,
+    },
     genre: {
       type: String,
       required: true,
@@ -15,9 +19,26 @@ const productSchema = new Schema<IProduct, IProductModel>(
       type: String,
       required: true,
     },
-    reviews: {
-      type: [String],
-    },
+    reviews: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        email: {
+          type: String,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
+        comment: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     title: {
       type: String,
       required: true,

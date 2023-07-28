@@ -10,5 +10,12 @@ router.post(
   zodValidateRequest(ProductZod.createProduct),
   ProductController.createProduct,
 );
+router.patch(
+  '/:id',
+  zodValidateRequest(ProductZod.updateProduct),
+  ProductController.updateProduct,
+);
+router.get('/:id', ProductController.singleProduct);
+router.delete('/:id', ProductController.deleteProduct);
 
 export const ProductRoutes = router;

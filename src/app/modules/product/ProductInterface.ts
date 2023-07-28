@@ -5,7 +5,13 @@ export type IProduct = {
   author: string;
   genre: string;
   publication_date: string;
-  reviews?: string[];
+  reviews?: {
+    name: string;
+    email: string;
+    image: string;
+    comment: string;
+  };
+  addBy: string;
   image: string;
 };
 export type IProductModel = {

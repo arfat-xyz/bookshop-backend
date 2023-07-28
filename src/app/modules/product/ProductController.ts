@@ -29,7 +29,44 @@ const getProducts = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const singleProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductService.singleProduct(id);
+  sendResponse<IProduct | null>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book retrived successfully',
+    meta: null,
+    data: result,
+  });
+});
+const deleteProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductService.singleProduct(id);
+  sendResponse<IProduct | null>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book retrived successfully',
+    meta: null,
+    data: result,
+  });
+});
+const updateProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const payload = req.body;
+  const result = await ProductService.updateProduct(id, payload);
+  sendResponse<IProduct | null>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book retrived successfully',
+    meta: null,
+    data: result,
+  });
+});
 export const ProductController = {
   getProducts,
   createProduct,
+  singleProduct,
+  deleteProduct,
+  updateProduct,
 };

@@ -1,3 +1,5 @@
+import httpStatus from 'http-status';
+import ApiError from '../../../error/ApiError';
 import { productSearch } from './ProductConstants';
 import { IProduct, IProductFilters } from './ProductInterface';
 import { ProducModel } from './ProductModel';
@@ -23,7 +25,38 @@ const getProducts = async (filter: IProductFilters) => {
     });
   }
   const whereCondition = andCondition.length > 0 ? { $and: andCondition } : {};
-  const result = await ProducModel.find(whereCondition).limit(Number(limit));
+  const result = await ProducModel.find(whereCondition)
+    .limit(Number(limit))
+    .sort({
+      createdAt: 1,
+    });
   return result;
 };
-export const ProductService = { createProduct, getProducts };
+const singleProduct = async (id: string) => {
+  const result = await ProducModel.findOne({ _id: id });
+
+  return result;
+};
+const deleteProduct = async (id: string) => {
+  const result = await ProducModel.findOneAndDelete({ _id: id });
+
+  return result;
+};
+const updateProduct = async (id: string, payload: Partial<IProduct>) => {
+  const exist = await ProducModel.findOne({ _id: id });
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
+  }
+  const result = await ProducModel.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  console.log(result);
+  return result;
+};
+export const ProductService = {
+  createProduct,
+  updateProduct,
+  getProducts,
+  singleProduct,
+  deleteProduct,
+};
