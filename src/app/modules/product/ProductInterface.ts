@@ -6,9 +6,7 @@ export type IProduct = {
   genre: string;
   publication_date: string;
   reviews?: {
-    name: string;
     email: string;
-    image: string;
     comment: string;
   };
   addBy: string;
