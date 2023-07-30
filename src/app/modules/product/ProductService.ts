@@ -28,7 +28,7 @@ const getProducts = async (filter: IProductFilters) => {
   const result = await ProducModel.find(whereCondition)
     .limit(Number(limit))
     .sort({
-      createdAt: 1,
+      createdAt: -1,
     });
   return result;
 };
