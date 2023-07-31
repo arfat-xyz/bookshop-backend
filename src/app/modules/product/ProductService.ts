@@ -36,7 +36,7 @@ const singleProduct = async (id: string) => {
   const result = await ProducModel.findOne({ _id: id });
 
   return result;
-};
+  };
 const deleteProduct = async (id: string) => {
   const result = await ProducModel.findOneAndDelete({ _id: id });
 

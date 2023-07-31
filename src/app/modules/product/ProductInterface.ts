@@ -1,6 +1,7 @@
 import { Model } from 'mongoose';
 
 export type IProduct = {
+  _id?: string;
   title: string;
   author: string;
   genre: string;
@@ -11,6 +12,7 @@ export type IProduct = {
   };
   addBy: string;
   image: string;
+  finished?: boolean
 };
 export type IProductModel = {
   myStaticMethod(): number;

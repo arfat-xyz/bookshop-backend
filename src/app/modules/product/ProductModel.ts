@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IProduct, IProductModel } from './ProductInterface';
 
-const productSchema = new Schema<IProduct, IProductModel>(
+export const productSchema = new Schema<IProduct, IProductModel>(
   {
     author: {
       type: String,
