@@ -39,7 +39,6 @@ const singleProduct = async (id: string) => {
 };
 const deleteProduct = async (id: string) => {
   const result = await ProducModel.findOneAndDelete({ _id: id });
-
   return result;
 };
 const updateProduct = async (id: string, payload: Partial<IProduct>) => {

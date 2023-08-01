@@ -42,7 +42,7 @@ const singleProduct = catchAsync(async (req: Request, res: Response) => {
 });
 const deleteProduct = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await ProductService.singleProduct(id);
+  const result = await ProductService.deleteProduct(id);
   sendResponse<IProduct | null>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -55,7 +55,7 @@ const updateProduct = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const payload = req.body;
   const result = await ProductService.updateProduct(id, payload);
-  sendResponse<IProduct | null>(res, {
+  sendResponse<IProduct | string | null>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Book retrived successfully',

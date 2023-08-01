@@ -12,7 +12,7 @@ export type IProduct = {
   };
   addBy: string;
   image: string;
-  finished?: boolean
+  finished?: boolean;
 };
 export type IProductModel = {
   myStaticMethod(): number;
