@@ -36,7 +36,7 @@ const singleProduct = async (id: string) => {
   const result = await ProducModel.findOne({ _id: id });
 
   return result;
-  };
+};
 const deleteProduct = async (id: string) => {
   const result = await ProducModel.findOneAndDelete({ _id: id });
 
@@ -50,7 +50,6 @@ const updateProduct = async (id: string, payload: Partial<IProduct>) => {
   const result = await ProducModel.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });
-  console.log(result);
   return result;
 };
 export const ProductService = {

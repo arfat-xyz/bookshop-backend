@@ -1,5 +1,7 @@
+import httpStatus from 'http-status';
+import ApiError from '../../../error/ApiError';
 import { IProduct } from '../product/ProductInterface';
-import { ReadingModel } from './ReadingModel';
+import { WishlistModel } from './WishlistModel';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createReading = async ({
@@ -9,7 +11,7 @@ const createReading = async ({
   id: string;
   email: string;
 }): Promise<unknown> => {
-  const exist = await ReadingModel.findOne({ email }).populate({
+  const exist = await WishlistModel.findOne({ email }).populate({
     path: 'products',
   });
   let result;
@@ -18,7 +20,7 @@ const createReading = async ({
     if (check) {
       return exist;
     }
-    result = await ReadingModel.updateOne(
+    result = await WishlistModel.updateOne(
       { _id: exist._id },
       {
         $push: { products: id },
@@ -27,21 +29,27 @@ const createReading = async ({
       path: 'products',
     });
   } else {
-    const temp = await ReadingModel.create({ email, products: id });
-    result = await ReadingModel.findOne({ _id: temp._id }).populate({
+    const temp = await WishlistModel.create({ email, products: id });
+    result = await WishlistModel.findOne({ _id: temp._id }).populate({
       path: 'products',
     });
   }
   return result;
 };
-const getReading = async ({ email }: { email: string }) => {
-  const result = await ReadingModel.findOne({ email }).populate({
+const getReading = async ({ email }: { email: string | null }) => {
+  if (email == 'null') {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Email not found');
+  }
+  let result = await WishlistModel.findOne({ email }).populate({
     path: 'products',
   });
+  if (result === null) {
+    result = await WishlistModel.create({ email });
+  }
   return result;
 };
 const deleteReading = async ({ email, id }: { email: string; id: string }) => {
-  const result = await ReadingModel.updateOne(
+  const result = await WishlistModel.updateOne(
     { email },
     {
       $pull: {
@@ -58,7 +66,6 @@ const deleteReading = async ({ email, id }: { email: string; id: string }) => {
   */
   return result;
 };
-
 export const ReadingService = {
   createReading,
   getReading,

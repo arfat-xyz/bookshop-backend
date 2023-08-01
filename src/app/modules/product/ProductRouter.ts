@@ -4,6 +4,7 @@ import { ProductZod } from './ProductZodValidation';
 import zodValidateRequest from '../../middlewares/zodValidateError';
 
 const router = Router();
+router.delete('/', ProductController.deleteProduct);
 router.get('/', ProductController.getProducts);
 router.post(
   '/',
@@ -16,6 +17,5 @@ router.patch(
   ProductController.updateProduct,
 );
 router.get('/:id', ProductController.singleProduct);
-router.delete('/:id', ProductController.deleteProduct);
 
 export const ProductRoutes = router;

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import catchAsync from '../../../shared/cacheAsync';
 import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
-import { ReadingService } from './ReadingService';
+import { ReadingService } from './WishlistService';
 import { IProduct } from '../product/ProductInterface';
 
 const createReading = catchAsync(async (req: Request, res: Response) => {
@@ -12,7 +12,7 @@ const createReading = catchAsync(async (req: Request, res: Response) => {
   sendResponse<unknown>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Book created successfully',
+    message: 'Wishlist successfully',
     meta: null,
     data: result,
   });
@@ -24,7 +24,7 @@ const getReading = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IProduct[] | null | undefined>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Book created successfully',
+    message: 'Wishlist successfully',
     meta: null,
     data: result?.products,
   });
@@ -36,7 +36,7 @@ const deleteReading = catchAsync(async (req: Request, res: Response) => {
   sendResponse<null | undefined>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Book created successfully',
+    message: 'Wishlish successfully',
     meta: null,
     data: null,
   });
