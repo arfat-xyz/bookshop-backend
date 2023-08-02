@@ -7,6 +7,7 @@ const router = Router();
 router.delete('/:id', ProductController.deleteProduct);
 router.get('/:id', ProductController.singleProduct);
 router.get('/', ProductController.getProducts);
+router.post('/comment/:id', ProductController.postComment);
 router.post(
   '/',
   zodValidateRequest(ProductZod.createProduct),

@@ -63,10 +63,23 @@ const updateProduct = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const postComment = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const payload = req.body;
+  const result = await ProductService.postComment(id, payload);
+  sendResponse<IProduct | string | null>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Post comment successfully',
+    meta: null,
+    data: result,
+  });
+});
 export const ProductController = {
   getProducts,
   createProduct,
   singleProduct,
   deleteProduct,
   updateProduct,
+  postComment,
 };

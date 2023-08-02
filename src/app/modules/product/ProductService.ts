@@ -51,10 +51,28 @@ const updateProduct = async (id: string, payload: Partial<IProduct>) => {
   });
   return result;
 };
+const postComment = async (
+  id: string,
+  payload: { email: string; comment: string },
+) => {
+  const { email, comment } = payload;
+  const exist = await ProducModel.findOne({ _id: id });
+  if (!exist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
+  }
+  await ProducModel.updateOne(
+    { _id: id },
+    {
+      $push: { reviews: { email, comment } },
+    },
+  );
+  return 'result';
+};
 export const ProductService = {
   createProduct,
   updateProduct,
   getProducts,
   singleProduct,
   deleteProduct,
+  postComment,
 };

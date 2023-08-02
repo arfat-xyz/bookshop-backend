@@ -9,7 +9,7 @@ export type IProduct = {
   reviews?: {
     email: string;
     comment: string;
-  };
+  }[];
   addBy: string;
   image: string;
   finished?: boolean;
